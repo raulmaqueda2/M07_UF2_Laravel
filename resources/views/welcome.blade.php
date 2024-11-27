@@ -19,6 +19,12 @@
         <li><a href=/filmout/oldFilms>Pelis antiguas</a></li>
         <li><a href=/filmout/newFilms>Pelis nuevas</a></li>
         <li><a href=/filmout/films>Pelis</a></li>
+        <li><a href=/filmout/Drama>Pelis countFilms</a></li>
+        <li><a href=/filmout/filmsByYear/2022>Pelis filtrado por Año</a></li>
+
+        <li><a href=/filmout/filmsByGenre/Drama>Pelis filtrado por drama</a></li>
+        <li><a href=/filmout/countFilms>Pelis countFilms</a></li>
+
     </ul>
     <!-- Add Bootstrap JS and Popper.js (required for Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
