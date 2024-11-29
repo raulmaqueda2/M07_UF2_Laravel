@@ -10,11 +10,13 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 COPY . /var/www/html/
 
-WORKDIR /var/www/html/public
-
 RUN chown -R www-data:www-data /var/www/html
 
-RUN composer install
+USER www-data
+
+RUN composer install --no-interaction --optimize-autoloader
+
+WORKDIR /var/www/html/public
 
 RUN echo 'DocumentRoot /var/www/html/public' > /etc/apache2/sites-available/000-default.conf
 
