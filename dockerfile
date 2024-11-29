@@ -18,8 +18,6 @@ RUN composer install --no-interaction --optimize-autoloader
 
 WORKDIR /var/www/html/public
 
-RUN a2enmod rewrite
-
 EXPOSE 80
 
 CMD ["apache2-foreground"]
