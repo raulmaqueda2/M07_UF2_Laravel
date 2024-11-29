@@ -18,7 +18,7 @@ RUN composer install --no-interaction --optimize-autoloader
 
 WORKDIR /var/www/html/public
 
-RUN echo 'DocumentRoot /var/www/html/public' > /etc/apache2/sites-available/000-default.conf
+RUN echo 'DocumentRoot /var/www/html/public' | tee /etc/apache2/sites-available/000-default.conf
 
 RUN a2enmod rewrite
 
