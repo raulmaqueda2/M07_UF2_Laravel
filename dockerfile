@@ -14,7 +14,9 @@ WORKDIR /var/www/html/public
 
 RUN chown -R www-data:www-data /var/www/html
 
-RUN composer install --no-interaction --optimize-autoloader
+RUN composer install
+
+RUN echo 'DocumentRoot /var/www/html/public' > /etc/apache2/sites-available/000-default.conf
 
 RUN a2enmod rewrite
 
