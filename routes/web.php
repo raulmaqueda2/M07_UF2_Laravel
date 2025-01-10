@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
 Route::middleware('year')->group(function () {
     Route::group(['prefix' => 'filmout'], function () {
         // Routes included with prefix "filmout"
@@ -28,8 +27,23 @@ Route::middleware('year')->group(function () {
         Route::get('filmsByGenre/{filmsByGenre?}', [FilmController::class, "listFilmsByGenre"])->name('listFilmsByGenre');
         Route::get('sortFilms', [FilmController::class, "sortFilms"])->name('sortFilms');
         Route::get('countFilms', [FilmController::class, "countFilms"])->name('countFilms');
+        Route::get('films', [FilmController::class, "listFilms"])->name('listFilms');
 
     });
+
+
+});
+Route::group(['prefix' => 'filmin'], function () {
+    Route::post('createFilm', [FilmController::class, "createFilm"])->name('createFilm');
+
 });
 
+Route::group(['prefix' => 'error'], function () {
+    Route::get('url', function () {
+        return view('error', ["error" => "url no valida"]);
+    });
+    Route::get('filmExist', function () {
+        return view('error', ["error" => "el nombre de la pelicula ya existe"]);
+    });
+});
 

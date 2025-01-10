@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
+
 
 class FilmController extends Controller
 {
@@ -13,6 +15,27 @@ class FilmController extends Controller
     {
         $films = Storage::json('/public/films.json');
         return $films;
+    }
+    public static function exisitFilms($name): bool
+    {
+        $films = FilmController::readFilms();
+        foreach ($films as $key1 => $value1) {
+            foreach ($films[$key1] as $key => $value) {
+                if ($key == "name") {
+                    if ($value == $name) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static function addFilms($contenido): void
+    {
+        $actual = Storage::json('/public/films.json');
+        $actual[count($actual)] = $contenido;
+        Storage::put('/public/films.json', json_encode($actual));
     }
     /**
      * List films older than input year 
@@ -128,6 +151,14 @@ class FilmController extends Controller
 
         return view('films.list', ["films" => $films, "title" => "Todas las prliculas"]);
 
+    }
+
+    //public function createFilm($nombre, $año, $genero, $pais, $duracion, $url)
+    public function createFilm(Request $request)
+    {
+        $contenido = ["name" => $request->post()["nombre"], "year" => $request->post()["año"], "genre" => $request->post()["genero"], "country" => $request->post()["pais"], "duration" => $request->post()["duracion"], "img_url" => $request->post()["url"]];
+        $this->addFilms($contenido);
+        return $this->listFilms();
     }
 
 }

@@ -1,11 +1,11 @@
 [
     {
-        "name": "La Rosa Púrpura del Cairo",
+        "name": "La Rosa P\u00farpura del Cairo",
         "year": 1985,
         "genre": "Drama",
-        "country": "España",
+        "country": "Espa\u00f1a",
         "duration": 90,
-        "img_url": "https://es.web.img2.acsta.net/medias/nmedia/18/79/45/34/20253823.jpg"
+        "img_url": "https:\/\/es.web.img2.acsta.net\/medias\/nmedia\/18\/79\/45\/34\/20253823.jpg"
     },
     {
         "name": "El Club de los Cinco",
@@ -13,7 +13,7 @@
         "genre": "Comedia",
         "country": "Francia",
         "duration": 130,
-        "img_url": "https://pics.filmaffinity.com/El_club_de_los_cinco-192309838-large.jpg"
+        "img_url": "https:\/\/pics.filmaffinity.com\/El_club_de_los_cinco-192309838-large.jpg"
     },
     {
         "name": "Forrest Gump",
@@ -21,15 +21,15 @@
         "genre": "Drama",
         "country": "Andorra",
         "duration": 70,
-        "img_url": "https://pics.filmaffinity.com/Forrest_Gump-212765827-large.jpg"
+        "img_url": "https:\/\/pics.filmaffinity.com\/Forrest_Gump-212765827-large.jpg"
     },
     {
         "name": "Arrival",
         "year": 2016,
-        "genre": "Ciencia Ficción",
+        "genre": "Ciencia Ficci\u00f3n",
         "country": "Estados unidos",
         "duration": 110,
-        "img_url": "https://pics.filmaffinity.com/La_llegada-686966912-large.jpg"
+        "img_url": "https:\/\/pics.filmaffinity.com\/La_llegada-686966912-large.jpg"
     },
     {
         "name": "As Bestas",
@@ -37,6 +37,22 @@
         "genre": "Drama",
         "country": "Inglaterra",
         "duration": 200,
-        "img_url": "https://pics.filmaffinity.com/As_bestas-275688233-large.jpg"
+        "img_url": "https:\/\/pics.filmaffinity.com\/As_bestas-275688233-large.jpg"
+    },
+    {
+        "name": "juan",
+        "year": "200",
+        "genre": "test",
+        "country": "espa\u00f1a",
+        "duration": "200",
+        "img_url": "https:\/\/th.bing.com\/th\/id\/OIP.ylAw3JJOTXicMUOdz9HqzgHaJ4?w=186&h=248&c=7&r=0&o=5&pid=1.7"
+    },
+    {
+        "name": "juan1",
+        "year": "200",
+        "genre": "test",
+        "country": "espa\u00f1a",
+        "duration": "200",
+        "img_url": "https:\/\/th.bing.com\/th\/id\/OIP.ylAw3JJOTXicMUOdz9HqzgHaJ4?w=186&h=248&c=7&r=0&o=5&pid=1.7"
     }
 ]
