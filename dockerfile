@@ -18,6 +18,8 @@ RUN composer clear-cache
 
 RUN composer install --no-interaction --optimize-autoloader -vvv
 
+RUN php artisan doctrine:schema:create
+
 WORKDIR /var/www/html/public
 
 EXPOSE 80

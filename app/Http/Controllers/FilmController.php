@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\film;
+use App\Repositories\FilmRepository;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-
-
 class FilmController extends Controller
 {
 
@@ -162,7 +162,9 @@ class FilmController extends Controller
     {
         $contenido = ["name" => $request->post()["nombre"], "year" => $request->post()["año"], "genre" => $request->post()["genero"], "country" => $request->post()["pais"], "duration" => $request->post()["duracion"], "img_url" => $request->post()["url"]];
         $this->addFilms($contenido);
+        (new filmRepository)->saveFilm(new film("test", 200, "nose", "nose", 200, "test"));
         return $this->listFilms();
+
     }
 
 }
