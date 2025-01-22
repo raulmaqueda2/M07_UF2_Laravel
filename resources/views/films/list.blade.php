@@ -11,21 +11,20 @@
                 </tr>
 
                 @if (isset($films[0]))
-                    @foreach($films as $film)
-                        @foreach(array_keys($film) as $key)
-                            <th>{{$key}}</th>
-                        @endforeach
-                        @break
-                    @endforeach
-
+                    <th>name</th>
+                    <th>year</th>
+                    <th>genre</th>
+                    <th>country</th>
+                    <th>duration</th>
+                    <th>img</th>
                     @foreach($films as $film)
                         <tr>
-                            <td>{{$film['name']}}</td>
-                            <td>{{$film['year']}}</td>
-                            <td>{{$film['genre']}}</td>
-                            <td>{{$film['country']}}</td>
-                            <td>{{$film['duration']}}</td>
-                            <td><img src={{$film['img_url']}} style="width: 100px; heigth: 120px;" /></td>
+                            <td>{{$film->name}}</td>
+                            <td>{{$film->year}}</td>
+                            <td>{{$film->genre}}</td>
+                            <td>{{$film->country}}</td>
+                            <td>{{$film->duration}}</td>
+                            <td><img src={{$film->img_url}} style="width: 100px; heigth: 120px;" /></td>
                         </tr>
                     @endforeach
                 @else

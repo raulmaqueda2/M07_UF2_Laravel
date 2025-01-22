@@ -112,33 +112,21 @@ class FilmController extends Controller
     }
     public function listFilms($year = null, $genre = null)
     {
-        $films_filtered = [];
+        $films_filtered = 0;
 
         $title = "Listado de todas las pelis";
-        $films = FilmController::readFilms();
-
+        $films = Film::select("*")->getQuery()->get();
+        print_r($films);
         if (is_null($year) && is_null($genre))
             return view('films.list', ["films" => $films, "title" => $title]);
 
-        foreach ($films as $film) {
-            if (!is_null($year) && !is_null($genre) && strtolower($film['genre']) == strtolower($genre) && $film['year'] == $year) {
-                $title = "Listado de todas las pelis filtrado x categoria y año";
-                $films_filtered[] = $film;
-            }
-        }
+
         return view("films.list", ["films" => $films_filtered, "title" => $title]);
     }
     public function sortFilms()
     {
-        $films = FilmController::readFilms();
-
-
-        usort($films, function ($a, $b) {
-            if ((int) $a['year'] == (int) $b['year']) {
-                return 0;
-            }
-            return ((int) $a['year'] > (int) $b['year']) ? -1 : 1;
-        });
+        //$films = FilmController::readFilms();
+        $films = Film::select("*")->getQuery()->orderBy('year', 'desc')->get();
         $title = "Listado de todas las pelis desde la mas nueva a la mas antigua";
 
         return view('films.list', ["films" => $films, "title" => $title]);
@@ -147,14 +135,14 @@ class FilmController extends Controller
 
     public function countFilms()
     {
-        $films = ["Cantidad de peliculas" => count(FilmController::readFilms())];
-
+        $films = ["Cantidad de peliculas" => (Film::select(['*'])->count())];
+        $films[0];
         return view('films.list', ["films" => $films, "title" => "Todas las prliculas"]);
     }
     public function countFilmsValue(): int
     {
 
-        return count(FilmController::readFilms());
+        return Film::select(['*'])->count();
     }
 
     //public function createFilm($nombre, $año, $genero, $pais, $duracion, $url)
@@ -162,7 +150,7 @@ class FilmController extends Controller
     {
         //$contenido = ["name" => $request->post()["nombre"], "year" => $request->post()["año"], "genre" => $request->post()["genero"], "country" => $request->post()["pais"], "duration" => $request->post()["duracion"], "img_url" => $request->post()["url"]];
         //$this->addFilms($contenido);
-        Film::created([
+        $peli = new Film([
             "name" => $request->post()["nombre"],
             "year" => $request->post()["año"],
             "genre" => $request->post()["genero"],
@@ -170,6 +158,7 @@ class FilmController extends Controller
             "duration" => $request->post()["duracion"],
             "img_url" => $request->post()["url"]
         ]);
+        $peli->save();
         return $this->listFilms();
     }
 
