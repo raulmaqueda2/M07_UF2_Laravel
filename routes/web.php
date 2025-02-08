@@ -28,14 +28,12 @@ Route::middleware('year')->group(function () {
         Route::get('sortFilms', [FilmController::class, "sortFilms"])->name('sortFilms');
         Route::get('countFilms', [FilmController::class, "countFilms"])->name('countFilms');
         Route::get('films', [FilmController::class, "listFilms"])->name('listFilms');
-
     });
-
-
 });
 Route::group(['prefix' => 'filmin'], function () {
     Route::post('createFilm', [FilmController::class, "createFilm"])->name('createFilm');
-
+    Route::put('updateFilm/{id}', [FilmController::class, 'updateFilm'])->name('films.update');
+    Route::get('edit/{id}', [FilmController::class, "edit"])->name('edit');
 });
 
 Route::group(['prefix' => 'error'], function () {
@@ -46,4 +44,3 @@ Route::group(['prefix' => 'error'], function () {
         return view('error', ["error" => "el nombre de la pelicula ya existe"]);
     });
 });
-
