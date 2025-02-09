@@ -1,30 +1,24 @@
 <?php
+
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 
-class film
+class Film extends Model
 {
-    private $name;
-    private $year;
-    private $genre;
-    private $country;
-    private $duration;
-    private $img_url;
+    // Nombre de la tabla (opcional si es 'films')
+    protected $table = 'films';
 
-    public function __construct(
-        $name,
-        $year,
-        $genre,
-        $country,
-        $duration,
-        $img_url
-    ) {
-        $this->name = $name;
-        $this->year = $year;
-        $this->genre = $genre;
-        $this->country = $country;
-        $this->duration = $duration;
-        $this->img_url = $img_url;
-    }
+    // Campos permitidos para la asignación masiva
+    protected $fillable = [
+        'name',
+        'year',
+        'genre',
+        'country',
+        'duration',
+        'img_url',
+    ];
 
+    // Si no necesitas timestamps (created_at y updated_at)
+    public $timestamps = false;
 }
