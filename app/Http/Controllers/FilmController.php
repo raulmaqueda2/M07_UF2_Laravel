@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Film;
+use Illuminate\Support\Facades\Log;
 
 class FilmController extends Controller
 {
@@ -133,18 +134,23 @@ class FilmController extends Controller
     //public function createFilm($nombre, $año, $genero, $pais, $duracion, $url)
     public function createFilm(Request $request)
     {
-        //$contenido = ["name" => $request->post()["nombre"], "year" => $request->post()["año"], "genre" => $request->post()["genero"], "country" => $request->post()["pais"], "duration" => $request->post()["duracion"], "img_url" => $request->post()["url"]];
-        //$this->addFilms($contenido);
-        $peli = new Film([
-            "name" => $request->post()["nombre"],
-            "year" => $request->post()["año"],
-            "genre" => $request->post()["genero"],
-            "country" => $request->post()["pais"],
-            "duration" => $request->post()["duracion"],
-            "img_url" => $request->post()["url"]
-        ]);
-        $peli->save();
-        return $this->listFilms();
+        try {
+            $peli = new Film([
+                "name" => $request->post()["nombre"],
+                "year" => $request->post()["año"],
+                "genre" => $request->post()["genero"],
+                "country" => $request->post()["pais"],
+                "duration" => $request->post()["duracion"],
+                "img_url" => $request->post()["url"]
+            ]);
+            $peli->save();
+            Log::info("INSERT Film: ID {$peli->id}, Name: {$peli->name}, Year: {$peli->year}, Genre: {$peli->genre}");
+
+            return $this->listFilms();
+        } catch (\Exception $e) {
+            Log::error("INSERT Film Failed: " . $e->getMessage());
+            return redirect()->back()->with('error', 'Error adding film');
+        }
     }
     public function edit($id)
     {
@@ -170,29 +176,44 @@ class FilmController extends Controller
         $film = Film::find($id);
 
         if (!$film) {
+            Log::error("UPDATE Failed: Film ID {$id} not found.");
             return view('error', ["error" => "pelicula no encontrada"]);
         }
 
-        $film->update([
-            'name' => $request->name,
-            'year' => $request->year,
-            'genre' => $request->genre,
-            'country' => $request->country,
-            'duration' => $request->duration,
-            'img_url' => $request->img_url,
-        ]);
+        try {
+            $film->update([
+                'name' => $request->name,
+                'year' => $request->year,
+                'genre' => $request->genre,
+                'country' => $request->country,
+                'duration' => $request->duration,
+                'img_url' => $request->img_url,
+            ]);
 
-        return view('success', ["success" => "Pelicula actualizada"]);
+            Log::info("UPDATE Film: ID {$id}, Name: {$request->name}, Year: {$request->year}, Genre: {$request->genre}");
+
+            return view('success', ["success" => "Pelicula actualizada"]);
+        } catch (\Exception $e) {
+            Log::error("UPDATE Failed: Film ID {$id}, Error: " . $e->getMessage());
+            return view('error', ["error" => "Error al actualizar la película"]);
+        }
     }
     public function deleteFilm($id, $confirm = null)
     {
-        $film = Film::findOrFail($id);
+        try {
+            $film = Film::findOrFail($id);
 
-        if ($confirm != null) {
-            $film->delete();
-            return view('success', ["success" => "Pelicula eliminada correctamente"]);
-        } else {
-            return view('action', ["opcion" => "¿deseas eliminar la pelicula?", "id" => $film->id]);
+            if ($confirm != null) {
+                $film->delete();
+                Log::info("DELETE Film: ID {$id}, Name: {$film->name}");
+
+                return view('success', ["success" => "Pelicula eliminada correctamente"]);
+            } else {
+                return view('action', ["opcion" => "¿Deseas eliminar la pelicula?", "id" => $film->id]);
+            }
+        } catch (\Exception $e) {
+            Log::error("DELETE Failed: Film ID {$id}, Error: " . $e->getMessage());
+            return view('error', ["error" => "Error al eliminar la pelicula"]);
         }
     }
 }
