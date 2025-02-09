@@ -184,4 +184,10 @@ class FilmController extends Controller
 
         return view('success', ["success" => "Pelicula actualizada"]);
     }
+    public function deleteFilm($id)
+    {
+        $film = Film::findOrFail($id);
+        $film->delete();
+        return view('success', ["success" => "Pelicula eliminada correctamente"]);
+    }
 }

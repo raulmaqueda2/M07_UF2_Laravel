@@ -37,9 +37,14 @@
                         <td>{{ $film->duration }}</td>
                         <td><img src="{{ $film->img_url }}" style="width: 100px; height: 120px;" /></td>
                         <td>
-                            <form action="/filmin/edit/{{ $film->id }}" method="GET">
+                            <form action="/filmin/updateFilm/{{ $film->id }}" method="GET">
                                 <button>
                                     <img style="width: 50px; height: 50px;" src="/img/edit.jpg" alt="">
+                                </button>
+                            </form>
+                            <form action="/filmin/deleteFilm/{{ $film->id }}" method="GET">
+                                <button>
+                                    <img style="width: 50px; height: 40px;" src="/img/del.png" alt="">
                                 </button>
                             </form>
                         </td>

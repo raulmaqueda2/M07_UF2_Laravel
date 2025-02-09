@@ -34,6 +34,7 @@ Route::group(['prefix' => 'filmin'], function () {
     Route::post('createFilm', [FilmController::class, "createFilm"])->name('createFilm');
     Route::get('updateFilm/{id}', [FilmController::class, 'edit'])->name('edit');
     Route::put('update/{id}', [FilmController::class, "update"])->name('update');
+    Route::get('deleteFilm/{id}', [FilmController::class, 'deleteFilm'])->name('films.delete');
 });
 
 Route::group(['prefix' => 'error'], function () {
