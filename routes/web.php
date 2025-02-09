@@ -32,13 +32,25 @@ Route::middleware('year')->group(function () {
 });
 Route::group(['prefix' => 'filmin'], function () {
     Route::post('createFilm', [FilmController::class, "createFilm"])->name('createFilm');
-    Route::put('updateFilm/{id}', [FilmController::class, 'updateFilm'])->name('films.update');
-    Route::get('edit/{id}', [FilmController::class, "edit"])->name('edit');
+    Route::get('updateFilm/{id}', [FilmController::class, 'edit'])->name('edit');
+    Route::put('update/{id}', [FilmController::class, "update"])->name('update');
 });
 
 Route::group(['prefix' => 'error'], function () {
     Route::get('url', function () {
         return view('error', ["error" => "url no valida"]);
+    });
+    Route::get('filmExist', function () {
+        return view('error', ["error" => "el nombre de la pelicula ya existe"]);
+    });
+    Route::get('film', function () {
+        return view('error', ["error" => "pelicula no encontrada"]);
+    });
+});
+
+Route::group(['prefix' => 'success'], function () {
+    Route::get('move', function () {
+        return view('success', ["success" => "Pelicula actualizada"]);
     });
     Route::get('filmExist', function () {
         return view('error', ["error" => "el nombre de la pelicula ya existe"]);

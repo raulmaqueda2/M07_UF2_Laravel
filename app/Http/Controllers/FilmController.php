@@ -150,7 +150,7 @@ class FilmController extends Controller
     {
         $film = Film::find($id);
         if (!$film) {
-            return redirect()->route('films.index')->with('error', 'Película no encontrada');
+            return view('error', ["error" => "pelicula no encontrada"]);
         }
 
         return view('films.edit', ['film' => $film, 'title' => 'Editar Película']);
@@ -170,7 +170,7 @@ class FilmController extends Controller
         $film = Film::find($id);
 
         if (!$film) {
-            return redirect()->route('films.index')->with('error', 'Película no encontrada');
+            return view('error', ["error" => "pelicula no encontrada"]);
         }
 
         $film->update([
@@ -182,6 +182,6 @@ class FilmController extends Controller
             'img_url' => $request->img_url,
         ]);
 
-        return redirect()->route('films.index')->with('success', 'Película actualizada correctamente');
+        return view('success', ["success" => "Pelicula actualizada"]);
     }
 }

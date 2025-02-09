@@ -1,9 +1,9 @@
 @include('cabezera')
 
 <div style="margin-top: 100px;">
-    <h1>{{$title}}</h1>
+    <h1>{{ $title }}</h1>
 
-    <form action="{{ route('films.update', ['id' => $film->id]) }}" method="POST">
+    <form action="/filmin/update/{{ $film->id }}" method="POST">
         @csrf
         @method('PUT')
 
