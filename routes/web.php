@@ -35,6 +35,8 @@ Route::group(['prefix' => 'filmin'], function () {
     Route::get('updateFilm/{id}', [FilmController::class, 'edit'])->name('edit');
     Route::put('update/{id}', [FilmController::class, "update"])->name('update');
     Route::get('deleteFilm/{id}', [FilmController::class, 'deleteFilm'])->name('films.delete');
+    Route::get('deleteFilm/{id}/{confirm}', [FilmController::class, 'deleteFilm'])->name('films.delete');
+
 });
 
 Route::group(['prefix' => 'error'], function () {
